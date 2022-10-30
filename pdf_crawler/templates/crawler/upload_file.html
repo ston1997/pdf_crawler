@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="file" id="input" accept="application/pdf" onchange="test()"/>
+    <button
+            type="file"
+            class="get-status-btn"
+            onclick="getStatus()"
+            >Get status</button>
+</body>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        width: 90vw;
+    }
+    .get-status-btn {
+        font-size: 19px;
+        padding: 5px 0;
+        max-width: 150px;
+        width: 100%;
+        background: #acf3b9;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+    .get-status-btn:hover {
+        cursor: pointer;
+        background: #629a6c;
+        color: #fff;
+    }
+    .get-status-btn:focus {
+        outline: none;
+        box-shadow: none;
+    }
+</style>
+<script>
+    var selectedFile = document.getElementById('input');
+
+    function getStatus(url, file_name) {
+        $.post(`${url}/${file_name}/`,
+            function (data, status) {
+                console.log("Data: " + data + "\nStatus: " + status);
+            });
+    }
+
+
+    function test() {
+        console.log(selectedFile.files[0])
+    }
+
+    // Convert file to base64 string
+    function fileToBase64(filename, filepath) {
+        var file = new File([filename], filepath);
+        var reader = new FileReader();
+        // Read file content on file loaded event
+        reader.onload = function(event) {
+          console.log(event.target.result);
+        };
+
+        // Convert data to base64
+        reader.readAsDataURL(file);
+    }
+
+</script>
+</html>

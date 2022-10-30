@@ -1,0 +1,15 @@
+venv/
+.idea/
+.env
+
+*.pc
+*.pyc
+*.pyo
+__pycache__
+.deps
+.libs
+/_build/
+
+staticfiles
+*.sqlite3
+*.log
